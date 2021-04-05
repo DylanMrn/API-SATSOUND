@@ -1,8 +1,11 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-
+mongoose.connect('mongodb+srv://root:root@clusterapi.t6rnf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+{ useNewUrlParser: true,
+useUnifiedTopology: true })
+.then(() => console.log('Connexion à MongoDB réussie !'))
+.catch(() => console.log('Connexion à MongoDB échouée !'));
 
 const app = express();
 
@@ -12,8 +15,6 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
-
-app.use(bodyParser.json());
 
 app.use('/api/stuff', (req, res, next) => {
     const stuff = [
